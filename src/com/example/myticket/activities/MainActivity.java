@@ -4,11 +4,16 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.TextView;
 
 import com.example.myticket.R;
 import com.example.myticket.db.DataBaseHelper;
+import com.example.myticket.db.MyApplication;
 import com.example.myticket.entities.Cinema;
 import com.example.myticket.entities.Location;
 import com.example.myticket.entities.Movie;
@@ -17,14 +22,38 @@ import com.example.myticket.entities.ScreeningRoom;
 import com.example.myticket.entities.User;
 
 public class MainActivity extends Activity {
-
+	private TextView _main_text;
+	private MyApplication _application;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_reserve);
-		
+		setContentView(R.layout.activity_main);
+		initView();
 	}
-	public void initData() {
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		User temp = _application.getUser();
+		if (temp != null) {
+			_main_text.setText(temp.getName());
+		}
+	}
+	private void initView() {
+		_main_text = (TextView)findViewById(R.id.main_user_name);
+		_application = (MyApplication)getApplication();
+		_main_text.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if (_application.getUser() == null) {
+					startActivity(new Intent(MainActivity.this, LoginActivity.class));
+				}
+			}
+		});
+	}
+	private void initData() {
 		DataBaseHelper dbHelper = DataBaseHelper.getInstance(this);
 		Cinema c1 = new Cinema();
 		c1.setCinema_id("c1");

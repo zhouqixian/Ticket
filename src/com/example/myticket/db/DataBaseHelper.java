@@ -281,33 +281,33 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 		return db.update(TABLE_SCREENING_ROOM, values, SCREENING_ROOM_ID+"=?", new String[]{screeningRoom.getScreening_room_id()});
 	}
 	
-	public int deleteUser(User user) {
+	public int deleteUser(String id) {
 		SQLiteDatabase db = this.getWritableDatabase();
-		return db.delete(TABLE_USER, USER_ID+"=?", new String[]{user.getUser_id()});
+		return db.delete(TABLE_USER, USER_ID+"=?", new String[]{id});
 	}
-	public int deleteCinema(Cinema cinema) {
+	public int deleteCinema(String id) {
 		SQLiteDatabase db = this.getWritableDatabase();
-		return db.delete(TABLE_CINEMA, CINEMA_ID+"=?", new String[]{cinema.getCinema_id()});
+		return db.delete(TABLE_CINEMA, CINEMA_ID+"=?", new String[]{id});
 	}
-	public int deleteLocation(Location location) {
+	public int deleteLocation(String dist_code) {
 		SQLiteDatabase db = this.getWritableDatabase();
-		return db.delete(TABLE_LOCATION, DIST_CODE+"=?", new String[]{location.getDist_code()});
+		return db.delete(TABLE_LOCATION, DIST_CODE+"=?", new String[]{dist_code});
 	}
-	public int deleteMovie(Movie movie) {
+	public int deleteMovie(String id) {
 		SQLiteDatabase db = this.getWritableDatabase();
-		return db.delete(TABLE_MOVIE, MOVIE_ID+"=?", new String[]{movie.getMovie_id()});
+		return db.delete(TABLE_MOVIE, MOVIE_ID+"=?", new String[]{id});
 	}
-	public int deleteProductDescription(ProductDescription productDescription) {
+	public int deleteProductDescription(String id) {
 		SQLiteDatabase db = this.getWritableDatabase();
-		return db.delete(TABLE_PRODUCT_DESCRIPTION, PRODES_ID+"=?", new String[]{productDescription.getProduct_description_id()});
+		return db.delete(TABLE_PRODUCT_DESCRIPTION, PRODES_ID+"=?", new String[]{id});
 	}
-	public int deleteReservation(Reservation reservation) {
+	public int deleteReservation(String id) {
 		SQLiteDatabase db = this.getWritableDatabase();
-		return db.delete(TABLE_RESERVATION, RESERVATION_ID+"=?", new String[]{reservation.getReservation_id()});
+		return db.delete(TABLE_RESERVATION, RESERVATION_ID+"=?", new String[]{id});
 	}
-	public int deleteScreeningRoom(ScreeningRoom screeningRoom) {
+	public int deleteScreeningRoom(String id) {
 		SQLiteDatabase db = this.getWritableDatabase();
-		return db.delete(TABLE_SCREENING_ROOM, SCREENING_ROOM_ID+"=?", new String[]{screeningRoom.getScreening_room_id()});
+		return db.delete(TABLE_SCREENING_ROOM, SCREENING_ROOM_ID+"=?", new String[]{id});
 	}
 	
 	public User queryUser(String id) {
