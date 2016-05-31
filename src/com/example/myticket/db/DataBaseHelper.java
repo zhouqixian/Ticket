@@ -21,48 +21,48 @@ import com.example.myticket.entities.User;
 
 public class DataBaseHelper extends SQLiteOpenHelper{
 	private final static String DATABASE_NAME = "ticket.db3";  
-    private final static int DB_VERSION = 1;
+    private final static int DB_VERSION = 5;
     
     //表名
-    private final static String TABLE_CINEMA = "CINEMA";
-    private final static String TABLE_LOCATION = "LOCATION";
-    private final static String TABLE_MOVIE = "MOVIE";
-    private final static String TABLE_PRODUCT_DESCRIPTION = "PRODUCTDESCRIPTION";
-    private final static String TABLE_RESERVATION = "RESERVATION";
-    private final static String TABLE_SCREENING_ROOM = "SCREENINGROOM";
-    private final static String TABLE_USER = "USER";
+    public final static String TABLE_CINEMA = "CINEMA";
+    public final static String TABLE_LOCATION = "LOCATION";
+    public final static String TABLE_MOVIE = "MOVIE";
+    public final static String TABLE_PRODUCT_DESCRIPTION = "PRODUCTDESCRIPTION";
+    public final static String TABLE_RESERVATION = "RESERVATION";
+    public final static String TABLE_SCREENING_ROOM = "SCREENINGROOM";
+    public final static String TABLE_USER = "USER";
     //列名
-    private final static String USER_ID = "UserId";
-    private final static String USER_NAME = "Name";
-    private final static String USER_PASSWORD = "Password";
-    private final static String DIST_CODE = "DistCode";
-    private final static String MOVIE_ID = "MovieId";
-    private final static String MOVIE_NAME = "Name";
-    private final static String MOVIE_TAG = "Tag";
-    private final static String MOVIE_ACTORS = "Actors";
-    private final static String MOVIE_DIRECTOR = "Director";
-    private final static String MOVIE_PHOTO = "Photo";
-    private final static String MOVIE_DESCRIPTION = "Description";
-    private final static String MOVIE_LANGUAGES = "Languages";
-    private final static String MOVIE_DURATION = "Duration";
-    private final static String MOVIE_SALE_ACCOUNT = "SaleAccount";
-    private final static String MOVIE_POINT = "Point";
-    private final static String CINEMA_ID = "CinemaId";
-    private final static String CINEMA_NAME = "Name";
-    private final static String LOCATION_ADDRESS_NAME = "AddressName";
-    private final static String PRODES_ID = "ProductDescriptionId";
-    private final static String PRODES_TYPE = "Type";
-    private final static String PRODES_START_TIME = "StartTime";
-    private final static String PRODES_PRICE = "Price";
-    private final static String PRODES_SEAT_AVAILIABLE = "SeatAvailiable";
-    private final static String SCREENING_ROOM_ID = "ScreeningRoomId";
-    private final static String SCREENING_ROOM_NAME = "Name";
-    private final static String SCREENING_ROOM_ROW = "Row";
-    private final static String SCREENING_ROOM_COL = "Col";
-    private final static String RESERVATION_ID = "ReservationId";
-    private final static String RESERVATION_RESERVE_TIME = "ReserveTime";
-    private final static String RESERVATION_PHONE = "Phone";
-    private final static String RESERVATION_SEAT = "Seat";
+    public final static String USER_ID = "UserId";
+    public final static String USER_NAME = "Name";
+    public final static String USER_PASSWORD = "Password";
+    public final static String DIST_CODE = "DistCode";
+    public final static String MOVIE_ID = "MovieId";
+    public final static String MOVIE_NAME = "Name";
+    public final static String MOVIE_TAG = "Tag";
+    public final static String MOVIE_ACTORS = "Actors";
+    public final static String MOVIE_DIRECTOR = "Director";
+    public final static String MOVIE_PHOTO = "Photo";
+    public final static String MOVIE_DESCRIPTION = "Description";
+    public final static String MOVIE_LANGUAGES = "Languages";
+    public final static String MOVIE_DURATION = "Duration";
+    public final static String MOVIE_SALE_ACCOUNT = "SaleAccount";
+    public final static String MOVIE_POINT = "Point";
+    public final static String CINEMA_ID = "CinemaId";
+    public final static String CINEMA_NAME = "Name";
+    public final static String LOCATION_ADDRESS_NAME = "AddressName";
+    public final static String PRODES_ID = "ProductDescriptionId";
+    public final static String PRODES_TYPE = "Type";
+    public final static String PRODES_START_TIME = "StartTime";
+    public final static String PRODES_PRICE = "Price";
+    public final static String PRODES_SEAT_AVAILIABLE = "SeatAvailiable";
+    public final static String SCREENING_ROOM_ID = "ScreeningRoomId";
+    public final static String SCREENING_ROOM_NAME = "Name";
+    public final static String SCREENING_ROOM_ROW = "Row";
+    public final static String SCREENING_ROOM_COL = "Col";
+    public final static String RESERVATION_ID = "ReservationId";
+    public final static String RESERVATION_RESERVE_TIME = "ReserveTime";
+    public final static String RESERVATION_PHONE = "Phone";
+    public final static String RESERVATION_SEAT = "Seat";
     
     
     private static DataBaseHelper _instance = null;
@@ -131,6 +131,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 	
 
 	public long addUser(User user) {
+		if (this.queryUser(user.getUser_id()) != null) return 0;
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put(USER_ID, user.getUser_id());
@@ -140,6 +141,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 		return db.insert(TABLE_USER, null, values);
 	}
 	public long addCinema(Cinema cinema) {
+		if (this.queryCinema(cinema.getCinema_id()) != null) return 0;
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put(CINEMA_ID, cinema.getCinema_id());
@@ -148,6 +150,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 		return db.insert(TABLE_CINEMA, null, values);
 	}
 	public long addLocation(Location location) {
+		if (this.queryLocation(location.getDist_code()) != null) return 0;
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put(LOCATION_ADDRESS_NAME, location.getAddress_name());
@@ -155,6 +158,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 		return db.insert(TABLE_LOCATION, null, values);
 	}
 	public long addMovie(Movie movie) {
+		if (this.queryMovie(movie.getMovie_id()) != null) return 0;
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put(MOVIE_ID, movie.getMovie_id());
@@ -171,6 +175,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 		return db.insert(TABLE_MOVIE, null, values);
 	}
 	public long addProductDescription(ProductDescription productDescription) {
+		if (this.queryProductDescription(productDescription.getProduct_description_id()) != null) return 0;
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put(PRODES_ID, productDescription.getProduct_description_id());
@@ -185,6 +190,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 		return db.insert(TABLE_PRODUCT_DESCRIPTION, null, values);
 	}
 	public long addReservation(Reservation reservation) {
+		if (this.queryReservation(reservation.getReservation_id()) != null) return 0;
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put(RESERVATION_ID, reservation.getReservation_id());
@@ -196,6 +202,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 		return db.insert(TABLE_RESERVATION, null, values);
 	}
 	public long addScreeningRoom(ScreeningRoom screeningRoom) {
+		if (this.queryScreeningRoom(screeningRoom.getScreening_room_id()) != null) return 0;
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put(SCREENING_ROOM_ID, screeningRoom.getScreening_room_id());
@@ -312,8 +319,8 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 	
 	public User queryUser(String id) {
 		SQLiteDatabase db = this.getReadableDatabase();
-		Cursor cursor = db.rawQuery(String.format("select * from %s where %s = %s", TABLE_USER, USER_ID, id), 
-				null);
+		Cursor cursor = db.rawQuery(String.format("select * from %s where %s = ?", TABLE_USER, USER_ID), 
+				new String[]{id});
 		try {
 			if (cursor != null && cursor.moveToFirst()) {
 				User temp = new User();
@@ -356,8 +363,8 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 	}
 	public Cinema queryCinema(String id) {
 		SQLiteDatabase db = this.getReadableDatabase();
-		Cursor cursor = db.rawQuery(String.format("select * from %s where %s = %s", TABLE_CINEMA, CINEMA_ID, id), 
-				null);
+		Cursor cursor = db.rawQuery("select * from " + TABLE_CINEMA + " where " + CINEMA_ID + " like ?", 
+				new String[]{id});
 		try {
 			if (cursor != null && cursor.moveToFirst()) {
 				Cinema temp = new Cinema();
@@ -399,8 +406,8 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 	}
 	public Location queryLocation(String dist_code) {
 		SQLiteDatabase db = this.getReadableDatabase();
-		Cursor cursor = db.rawQuery(String.format("select * from %s where %s = %s", TABLE_LOCATION, DIST_CODE, dist_code), 
-				null);
+		Cursor cursor = db.rawQuery(String.format("select * from %s where %s = ?", TABLE_LOCATION, DIST_CODE), 
+				new String[]{dist_code});
 		try {
 			if (cursor != null && cursor.moveToFirst()) {
 				Location temp = new Location();
@@ -440,8 +447,8 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 	}
 	public Movie queryMovie(String id) {
 		SQLiteDatabase db = this.getReadableDatabase();
-		Cursor cursor = db.rawQuery(String.format("select * from %s where %s = %s", TABLE_MOVIE, MOVIE_ID, id), 
-				null);
+		Cursor cursor = db.rawQuery(String.format("select * from %s where %s = ?", TABLE_MOVIE, MOVIE_ID), 
+				new String[]{id});
 		try {
 			if (cursor != null && cursor.moveToFirst()) {
 				Movie temp = new Movie();
@@ -499,8 +506,8 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 	}
 	public ProductDescription queryProductDescription(String id) {
 		SQLiteDatabase db = this.getReadableDatabase();
-		Cursor cursor = db.rawQuery(String.format("select * from %s where %s = %s", TABLE_PRODUCT_DESCRIPTION, PRODES_ID, id), 
-				null);
+		Cursor cursor = db.rawQuery(String.format("select * from %s where %s = ?", TABLE_PRODUCT_DESCRIPTION, PRODES_ID), 
+				new String[]{id});
 		try {
 			if (cursor != null && cursor.moveToFirst()) {
 				ProductDescription temp = new ProductDescription();
@@ -516,6 +523,36 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 				temp.setPrice(cursor.getFloat(7));
 				cursor.close();
 				return temp;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} 
+		return null;
+	}
+	public ArrayList<ProductDescription> queryProductDescriptionsByMovie(String movieId) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.rawQuery(String.format("select * from %s where %s = ?", TABLE_PRODUCT_DESCRIPTION, MOVIE_ID), 
+				new String[]{movieId});
+		try {
+			if (cursor != null && cursor.moveToFirst()) {
+				ArrayList<ProductDescription> re = new ArrayList<ProductDescription>();
+				do {
+					ProductDescription temp = new ProductDescription();
+					temp.setProduct_description_id(cursor.getString(0));
+					temp.setMovie_id(cursor.getString(1));
+					temp.setCinema_id(cursor.getString(2));
+					temp.setScreening_room_id(cursor.getString(3));
+					temp.setType(cursor.getString(4));
+					String st = cursor.getString(5);
+					SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+					temp.setStartTime(df.parse(st));
+					temp.setSeat_availible(cursor.getString(6));
+					temp.setPrice(cursor.getFloat(7));
+					re.add(temp);
+				} while (cursor.moveToNext());
+				cursor.close();
+				return re;
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -556,8 +593,8 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 	}
 	public Reservation queryReservation(String id) {
 		SQLiteDatabase db = this.getReadableDatabase();
-		Cursor cursor = db.rawQuery(String.format("select * from %s where %s = %s", TABLE_RESERVATION, RESERVATION_ID, id), 
-				null);
+		Cursor cursor = db.rawQuery(String.format("select * from %s where %s = ?", TABLE_RESERVATION, RESERVATION_ID), 
+				new String[]{id});
 		try {
 			if (cursor != null && cursor.moveToFirst()) {
 				Reservation temp = new Reservation();
@@ -607,8 +644,8 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 	}
 	public ScreeningRoom queryScreeningRoom(String id) {
 		SQLiteDatabase db = this.getReadableDatabase();
-		Cursor cursor = db.rawQuery(String.format("select * from %s where %s = %s", TABLE_SCREENING_ROOM, SCREENING_ROOM_ID, id), 
-				null);
+		Cursor cursor = db.rawQuery(String.format("select * from %s where %s = ?", TABLE_SCREENING_ROOM, SCREENING_ROOM_ID), 
+				new String[]{id});
 		try {
 			if (cursor != null && cursor.moveToFirst()) {
 				ScreeningRoom temp = new ScreeningRoom();

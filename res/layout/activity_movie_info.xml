@@ -10,6 +10,7 @@
     	android:orientation="horizontal"
         >
         <ImageView 
+            android:id="@+id/movie_info_back"
             android:layout_width="wrap_content"
     		android:layout_height="match_parent"
     		android:adjustViewBounds="true"
@@ -18,7 +19,7 @@
     </LinearLayout>
 	<ScrollView 
 	    android:layout_width="match_parent"
-    	android:layout_height="match_parent"
+    	android:layout_height="wrap_content"
 	    >
         <LinearLayout 
             android:layout_width="match_parent"
@@ -33,12 +34,12 @@
 		        android:layout_marginTop="10dp"
 		        android:orientation="horizontal"
 		        >
-		        <ImageView 
+		        <ImageView
+		            android:id="@+id/movie_info_img"
 		            android:layout_width="match_parent"
 	    			android:layout_height="wrap_content"
 	    			android:layout_weight="2"
 	    			android:adjustViewBounds="true"
-	    			android:src="@drawable/photo1"
 		            />
 		        <LinearLayout 
 		            android:layout_width="match_parent"
@@ -47,36 +48,52 @@
 	    			android:layout_marginLeft="10dp"
 	    			android:orientation="vertical"
 		            >
-		            <TextView 
+		            <TextView
+		                android:id="@+id/movie_info_name"
 		                android:layout_width="match_parent"
 	    				android:layout_height="wrap_content"
 	    				android:text="美国队长3"
+	    				android:textSize="18sp"
 		                />
-		            <TextView 
-		                android:layout_width="match_parent"
-	    				android:layout_height="wrap_content"
-	    				android:layout_marginTop="5dp"
-	    				android:text="3D"
-		                />
-		            <TextView 
-		                android:layout_width="match_parent"
-	    				android:layout_height="wrap_content"
-	    				android:layout_marginTop="5dp"
-	    				android:text="7.6分"
-		                />
-		            <TextView 
+
+		            <LinearLayout 
+					    android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="5dp"
+						android:orientation="horizontal"
+						android:gravity="center_vertical"
+					    >
+					    <ImageView
+					        android:layout_width="match_parent"
+							android:layout_height="match_parent"
+							android:src="@drawable/ic_crown"
+							android:layout_weight="10"
+					        />
+			            <TextView
+			                android:id="@+id/movie_info_point"
+			                android:layout_width="match_parent"
+		    				android:layout_height="wrap_content"
+		    				android:layout_marginLeft="7dp"
+							android:layout_weight="1"
+		    				android:text="7.6分"
+			                />
+			        </LinearLayout>
+		            <TextView
+		                android:id="@+id/movie_info_tag"
 		                android:layout_width="match_parent"
 	    				android:layout_height="wrap_content"
 	    				android:layout_marginTop="5dp"
 	    				android:text="奇幻/冒险"
 		                />
-		            <TextView 
+		            <TextView
+		                android:id="@+id/movie_info_language"
 		                android:layout_width="match_parent"
 	    				android:layout_height="wrap_content"
 	    				android:layout_marginTop="5dp"
 	    				android:text="英语"
 		                />
-		            <TextView 
+		            <TextView
+		                android:id="@+id/movie_info_duration"
 		                android:layout_width="match_parent"
 	    				android:layout_height="wrap_content"
 	    				android:layout_marginTop="5dp"
@@ -84,19 +101,35 @@
 		                />
 		        </LinearLayout>
 		    </LinearLayout>
+		    <LinearLayout 
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="10dp"
+		        android:orientation="horizontal"
+		        >
+		        <TextView 
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="导演："
+			        android:textStyle="bold"
+			        />
+		        <TextView
+		            android:id="@+id/movie_info_director"
+		            android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="XXX"
+		            />
+		    </LinearLayout>
+			    
 		    <TextView 
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="10dp"
-		        android:text="导演：XXX"
+		        android:text="演员："
+		        android:textStyle="bold"
 		        />
-		    <TextView 
-		        android:layout_width="match_parent"
-		        android:layout_height="wrap_content"
-		        android:layout_marginTop="10dp"
-		        android:text="演员"
-		        />
-		    <TextView 
+		    <TextView
+		        android:id="@+id/movie_info_actors"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:text="克里斯·埃文斯，小罗伯特·唐尼，塞巴斯蒂安·斯坦，斯嘉丽·约翰逊，伊丽莎白·奥尔森，查德维克·博斯曼，安东尼·麦凯，保罗·贝坦尼，保罗·路德，唐·钱德尔，杰瑞米·雷纳，汤姆·赫兰德"
@@ -105,18 +138,24 @@
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="10dp"
-		        android:text="剧情"
+		        android:text="剧情："
+		        android:textStyle="bold"
 		        />
 		    <TextView 
+		        android:id="@+id/movie_info_plot"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:text="在奥创对这个世界造成了巨大的影响之后，复仇者联盟还是团结一致保护人类的。但是在一些政治角力的背后，政府中有人认为是有必要控制一下这些超级英雄的超自然能力和他们的行动了。于是，一项管控措施出台。这个措施就是要求复联按照政府的要求来行动。任务的开展、进程和结束，都要由政府主导。这个管控措施在复联中引起了极大的争议。意见最极端、最两极分化不可调和的，就是钢铁侠和美国队长之间的问题，于是，这两个同盟者之间的矛盾就此爆发了出来。而复联的“内战”也不可避免的爆发。"
 		        />
-		    <ListView 
-		        android:id="@+id/movie_info_product_list"
-	        	android:layout_width="match_parent"
-    			android:layout_height="wrap_content"
-		        />
+			<Button 
+			    android:id="@+id/movie_info_reserve"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="30dp"
+		        android:layout_marginBottom="30dp"
+		        android:text="预订"
+		        android:background="@drawable/button_bg"
+			    />
 		</LinearLayout>
 	</ScrollView>
 </LinearLayout>

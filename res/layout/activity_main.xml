@@ -28,14 +28,11 @@
     		android:text="请登录"
             />
     </LinearLayout>
-	<ScrollView 
-	    android:layout_width="match_parent"
-    	android:layout_height="match_parent"
-	    >
-	    <ListView 
-	        android:id="@+id/main_movie_list"
-	        android:layout_width="match_parent"
-    		android:layout_height="wrap_content"
-	        />
-	</ScrollView>
+    <ListView 
+        android:id="@+id/main_movie_list"
+        android:layout_width="match_parent"
+   		android:layout_height="wrap_content"
+   		android:divider="#FF8C08"
+   		android:dividerHeight="2px"
+        />
 </LinearLayout>

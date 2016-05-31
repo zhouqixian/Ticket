@@ -105,10 +105,12 @@
 			    android:gravity="right"
 			    />
 			<Button 
-			    android:layout_width="230dp"
+			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
-			    android:text="预订"
+			    android:text="确定"
 			    android:layout_marginTop="30dp"
+			    android:layout_marginBottom="30dp"
+			    android:background="@drawable/button_bg"
 			    />
         </LinearLayout>
     </ScrollView>
