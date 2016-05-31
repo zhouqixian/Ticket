@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="brefore_click">#9fff0000</color>
+    <color name="after_click">#dfa81e0f</color>
+</resources>
