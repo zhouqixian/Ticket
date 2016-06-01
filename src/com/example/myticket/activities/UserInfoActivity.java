@@ -1,4 +1,4 @@
-package com.example.myticket;
+package com.example.myticket.activities;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.example.myticket.R;
+import com.example.myticket.R.id;
+import com.example.myticket.R.layout;
 import com.example.myticket.db.DataBaseHelper;
 import com.example.myticket.db.MyApplication;
 import com.example.myticket.entities.Cinema;

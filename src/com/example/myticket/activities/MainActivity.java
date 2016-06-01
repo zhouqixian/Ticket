@@ -18,7 +18,6 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.example.myticket.R;
-import com.example.myticket.UserInfoActivity;
 import com.example.myticket.db.DataBaseHelper;
 import com.example.myticket.db.MyApplication;
 import com.example.myticket.entities.Movie;
