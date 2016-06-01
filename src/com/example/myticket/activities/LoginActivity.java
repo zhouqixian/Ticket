@@ -2,6 +2,7 @@ package com.example.myticket.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -64,13 +65,21 @@ public class LoginActivity extends Activity{
 		User temp = dbHandler.queryUser(phone);
 		if (temp == null) {
 			Toast.makeText(this, "’À∫≈≤ª¥Ê‘⁄", Toast.LENGTH_SHORT).show();
+			_phone_edt.setText("");
+			_password_edt.setText("");
 			return;
 		}
 		if (!temp.getPassword().equals(pw)) {
 			Toast.makeText(this, "√‹¬Î¥ÌŒÛ", Toast.LENGTH_SHORT).show();
+			_phone_edt.setText("");
+			_password_edt.setText("");
 			return;
 		}
 		_application.setUser(temp);
+		SharedPreferences sharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE);
+		SharedPreferences.Editor editor = sharedPreferences.edit();
+		editor.putString("phone", temp.getUser_id());
+		editor.commit();
 		finish();
 	}
 }

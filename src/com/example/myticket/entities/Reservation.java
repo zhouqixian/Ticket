@@ -14,11 +14,13 @@ public class Reservation implements Serializable{
 	private Date reservationTime;
 	private String phone;
 	private String seat;
+	private float total_price;
+	private int ticket_quantity;
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return String.format("Reservation{reservation_id:%s, product_description_id:%s, reservationTime:%s, phone:%s, seat:%s}", 
-				reservation_id, product_description_id, reservationTime.toString(), phone, seat);
+		return String.format("Reservation{reservation_id:%s, product_description_id:%s, reservationTime:%s, phone:%s, seat:%s, total_price:%f, ticket_quantity:%d}", 
+				reservation_id, product_description_id, reservationTime.toString(), phone, seat, total_price, ticket_quantity);
 	}
 
 	public Date getReservationTime() {
@@ -50,6 +52,22 @@ public class Reservation implements Serializable{
 	}
 	public void setSeat(String seat) {
 		this.seat = seat;
+	}
+
+	public float getTotal_price() {
+		return total_price;
+	}
+
+	public void setTotal_price(float total_price) {
+		this.total_price = total_price;
+	}
+
+	public int getTicket_quantity() {
+		return ticket_quantity;
+	}
+
+	public void setTicket_quantity(int ticket_quantity) {
+		this.ticket_quantity = ticket_quantity;
 	}
 
 }

@@ -91,9 +91,16 @@ public class MovieInfoActivity extends Activity {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(MovieInfoActivity.this, ProductActivity.class);
 				intent.putExtra("movie", movie);
-				startActivity(intent);
+				startActivityForResult(intent, 111);
 			}
 		});
 	}
-	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == 111 && resultCode == 112) {
+			finish();
+		}
+	}
 }

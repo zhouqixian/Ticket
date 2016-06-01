@@ -2,4 +2,6 @@
 <resources>
     <color name="brefore_click">#9fff0000</color>
     <color name="after_click">#dfa81e0f</color>
+    <color name="transparent">#00ffffff</color>
+    <color name="red">#ff0000</color>
 </resources>

@@ -14,6 +14,7 @@ import com.example.myticket.entities.ScreeningRoom;
 import com.example.myticket.entities.User;
 
 import android.app.Application;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 public class MyApplication extends Application{
@@ -23,7 +24,9 @@ public class MyApplication extends Application{
 	public void onCreate() {
 		// TODO Auto-generated method stub
 		super.onCreate();
-		_u = null;
+		SharedPreferences sharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE);
+		String phone = sharedPreferences.getString("phone", " ");
+		_u = DataBaseHelper.getInstance(getApplicationContext()).queryUser(phone);
 		_photo_map = new HashMap<String, Integer>();
 		_photo_map.put("photo1", new Integer(R.drawable.photo1));
 		_photo_map.put("photo2", new Integer(R.drawable.photo2));
@@ -41,6 +44,7 @@ public class MyApplication extends Application{
 	}
 	private void initData() {
 		DataBaseHelper dbHelper = DataBaseHelper.getInstance(getApplicationContext());
+		
 		Cinema c1 = new Cinema();
 		c1.setCinema_id("c1");
 		c1.setCinema_name("青宫电影城");
@@ -68,11 +72,11 @@ public class MyApplication extends Application{
 //		for (Location location : ls) {
 //			Log.i("test", location.toString());
 //		}
-		dbHelper.addScreeningRoom(new ScreeningRoom("s1", "A", 8, 10));
-		dbHelper.addScreeningRoom(new ScreeningRoom("s2", "B", 8, 10));
-		dbHelper.addScreeningRoom(new ScreeningRoom("s3", "C", 8, 10));
-		dbHelper.addScreeningRoom(new ScreeningRoom("s4", "D", 8, 10));
-		dbHelper.addScreeningRoom(new ScreeningRoom("s5", "E", 8, 10));
+		dbHelper.addScreeningRoom(new ScreeningRoom("s1", "A", 10, 8));
+		dbHelper.addScreeningRoom(new ScreeningRoom("s2", "B", 10, 8));
+		dbHelper.addScreeningRoom(new ScreeningRoom("s3", "C", 10, 8));
+		dbHelper.addScreeningRoom(new ScreeningRoom("s4", "D", 10, 8));
+		dbHelper.addScreeningRoom(new ScreeningRoom("s5", "E", 10, 8));
 //		ArrayList<ScreeningRoom> ss = dbHelper.queryAllScreeningRoom();
 //		for (ScreeningRoom screeningRoom : ss) {
 //			Log.i("test", screeningRoom.toString());
@@ -145,10 +149,11 @@ public class MyApplication extends Application{
 		p4.setStartTime(new Date(2016, 5, 30, 19, 20, 0));
 		p5.setStartTime(new Date(2016, 5, 30, 17, 0, 0));
 		p6.setStartTime(new Date(2016, 5, 30, 21, 40, 0));
-		String s = "1";
+		StringBuilder sb = new StringBuilder("1");
 		for (int i = 0; i < 79; i++) {
-			s+=",1";
+			sb.append(",1");
 		}
+		String s = sb.toString();
 		p1.setSeat_availible(s);
 		p2.setSeat_availible(s);
 		p3.setSeat_availible(s);

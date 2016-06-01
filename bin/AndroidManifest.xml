@@ -43,6 +43,10 @@
             android:name=".activities.ReserveActivity"
             android:label="@string/title_activity_reserve" >
         </activity>
+        <activity
+            android:name=".UserInfoActivity"
+            android:label="@string/title_activity_user_info" >
+        </activity>
     </application>
 
 </manifest>

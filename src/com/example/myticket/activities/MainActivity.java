@@ -7,6 +7,7 @@ import java.util.Map;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,13 +18,14 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.example.myticket.R;
+import com.example.myticket.UserInfoActivity;
 import com.example.myticket.db.DataBaseHelper;
 import com.example.myticket.db.MyApplication;
 import com.example.myticket.entities.Movie;
 import com.example.myticket.entities.User;
 
 public class MainActivity extends Activity {
-	private TextView _main_text;
+	private TextView _main_text, _logout_tv;
 	private ListView _movies_view;
 	private ArrayList<Movie> _movies;
 	private MyApplication _application;
@@ -34,7 +36,6 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		//initData();
 		initView();
 		setAdapter();
 		initEvent();
@@ -46,6 +47,10 @@ public class MainActivity extends Activity {
 		User temp = _application.getUser();
 		if (temp != null) {
 			_main_text.setText(temp.getName());
+			_logout_tv.setVisibility(View.VISIBLE);
+		}
+		else {
+			_logout_tv.setVisibility(View.GONE);
 		}
 		setAdapter();
 	}
@@ -57,6 +62,23 @@ public class MainActivity extends Activity {
 				if (_application.getUser() == null) {
 					startActivity(new Intent(MainActivity.this, LoginActivity.class));
 				}
+				else {
+					startActivity(new Intent(MainActivity.this, UserInfoActivity.class));
+				}
+			}
+		});
+		_logout_tv.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				SharedPreferences sharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE);
+				SharedPreferences.Editor editor = sharedPreferences.edit();
+				editor.putString("phone", " ");
+				editor.commit();
+				_application.setUser(null);
+				_main_text.setText("ÇëµÇÂ¼");
+				_logout_tv.setVisibility(View.GONE);
 			}
 		});
 		_movies_view.setOnItemClickListener(new OnItemClickListener() {
@@ -95,6 +117,7 @@ public class MainActivity extends Activity {
 	private void initView() {
 		_main_text = (TextView)findViewById(R.id.main_user_name);
 		_movies_view = (ListView)findViewById(R.id.main_movie_list);
+		_logout_tv = (TextView)findViewById(R.id.main_user_logout);
 		_application = (MyApplication)getApplication();
 		dbHandler = DataBaseHelper.getInstance(this);
 	}

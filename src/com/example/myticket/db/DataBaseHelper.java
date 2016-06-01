@@ -63,6 +63,8 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     public final static String RESERVATION_RESERVE_TIME = "ReserveTime";
     public final static String RESERVATION_PHONE = "Phone";
     public final static String RESERVATION_SEAT = "Seat";
+    public final static String RESERVATION_TOTAL_PRICE = "TotalPrice";
+    public final static String RESERVATION_TICKET_QUANTITY = "TicketQuantity";
     
     
     private static DataBaseHelper _instance = null;
@@ -91,8 +93,8 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 		String creat_movie_table = String.format("create table %s(%s text primary key, %s text, %s text, %s text, %s text, %s text, %s memo, %s text, %s Integer, %s Long, %s Single)", 
 				TABLE_MOVIE, MOVIE_ID, MOVIE_NAME, MOVIE_TAG, MOVIE_PHOTO, MOVIE_DIRECTOR, MOVIE_ACTORS, MOVIE_DESCRIPTION, MOVIE_LANGUAGES, MOVIE_DURATION, MOVIE_SALE_ACCOUNT, MOVIE_POINT);
 
-		String creat_reservation_table = String.format("create table %s(%s text primary key, %s text, %s text, %s text, %s text)", 
-				TABLE_RESERVATION, RESERVATION_ID, RESERVATION_PHONE, RESERVATION_RESERVE_TIME, RESERVATION_SEAT, PRODES_ID);
+		String creat_reservation_table = String.format("create table %s(%s text primary key, %s text, %s text, %s text, %s text, %s Single, %s Integer)", 
+				TABLE_RESERVATION, RESERVATION_ID, RESERVATION_PHONE, RESERVATION_RESERVE_TIME, RESERVATION_SEAT, PRODES_ID, RESERVATION_TOTAL_PRICE, RESERVATION_TICKET_QUANTITY);
 
 		String creat_pd_table = String.format("create table %s(%s text primary key, %s text, %s text, %s text, %s text, %s text, %s text, %s Double)", 
 				TABLE_PRODUCT_DESCRIPTION, PRODES_ID, MOVIE_ID, CINEMA_ID, SCREENING_ROOM_ID, PRODES_TYPE, PRODES_START_TIME, PRODES_SEAT_AVAILIABLE, PRODES_PRICE);
@@ -199,6 +201,8 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 		values.put(RESERVATION_SEAT, reservation.getSeat());
 		SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		values.put(RESERVATION_RESERVE_TIME, df.format(reservation.getReservationTime()));
+		values.put(RESERVATION_TOTAL_PRICE, reservation.getTotal_price());
+		values.put(RESERVATION_TICKET_QUANTITY, reservation.getTicket_quantity());
 		return db.insert(TABLE_RESERVATION, null, values);
 	}
 	public long addScreeningRoom(ScreeningRoom screeningRoom) {
@@ -276,6 +280,8 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 		values.put(RESERVATION_SEAT, reservation.getSeat());
 		SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		values.put(RESERVATION_RESERVE_TIME, df.format(reservation.getReservationTime()));
+		values.put(RESERVATION_TOTAL_PRICE, reservation.getTotal_price());
+		values.put(RESERVATION_TICKET_QUANTITY, reservation.getTicket_quantity());
 		return db.update(TABLE_RESERVATION, values, RESERVATION_ID+"=?", new String[]{reservation.getReservation_id()});
 	}
 	public int updateScreeningRoom(ScreeningRoom screeningRoom) {
@@ -605,8 +611,40 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 				temp.setReservationTime(df.parse(t));
 				temp.setSeat(cursor.getString(3));
 				temp.setProduct_description_id(cursor.getString(4));
+				temp.setTotal_price(cursor.getFloat(5));
+				temp.setTicket_quantity(cursor.getInt(6));
 				cursor.close();
 				return temp;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} 
+		return null;
+	}
+	public ArrayList<Reservation> queryReservationsByUserId(String id) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.rawQuery(String.format("select * from %s where %s = ?", TABLE_RESERVATION, RESERVATION_PHONE), 
+				new String[]{id});
+		try {
+			if (cursor != null && cursor.moveToFirst()) {
+				ArrayList<Reservation> re = new ArrayList<Reservation>();
+				do {
+					Reservation temp = new Reservation();
+					temp.setReservation_id(cursor.getString(0));
+					temp.setPhone(cursor.getString(1));
+					String t = cursor.getString(2);
+					SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+					temp.setReservationTime(df.parse(t));
+					temp.setSeat(cursor.getString(3));
+					temp.setProduct_description_id(cursor.getString(4));
+					temp.setTotal_price(cursor.getFloat(5));
+					temp.setTicket_quantity(cursor.getInt(6));
+					re.add(temp);
+				} while (cursor.moveToNext());
+				
+				cursor.close();
+				return re;
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -630,6 +668,8 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 					temp.setReservationTime(df.parse(t));
 					temp.setSeat(cursor.getString(3));
 					temp.setProduct_description_id(cursor.getString(4));
+					temp.setTotal_price(cursor.getFloat(5));
+					temp.setTicket_quantity(cursor.getInt(6));
 					re.add(temp);
 				} while (cursor.moveToNext());
 				

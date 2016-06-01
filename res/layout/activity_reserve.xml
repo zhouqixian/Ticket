@@ -10,6 +10,7 @@
     	android:orientation="horizontal"
         >
         <ImageView
+            android:id="@+id/reserve_back"
             android:layout_width="wrap_content"
     		android:layout_height="match_parent"
     		android:adjustViewBounds="true"
@@ -27,14 +28,15 @@
 		    android:gravity="center_horizontal"
 		    android:paddingLeft="10dp"
 		    android:paddingRight="10dp"
-		    android:paddingTop="10dp"
+		    android:paddingTop="20dp"
             >
             <TextView 
                 android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
 			    android:gravity="center"
 			    android:text="屏幕"
-			    android:textSize="20sp"
+			    android:textSize="22sp"
+			    android:layout_marginBottom="30dp"
                 />
             <LinearLayout 
                 android:id="@+id/reserve_seat_select_zoom"
@@ -42,69 +44,37 @@
 				android:layout_height="wrap_content"
 				android:orientation="vertical"
                 >
-			    <RadioGroup
-				    android:layout_width="match_parent"
-				    android:layout_height="wrap_content"
-				    android:orientation="horizontal"
-				    >
-		            <RadioButton 
-			            android:layout_width="match_parent"
-			    		android:layout_height="wrap_content"
-			    		android:layout_weight="1"
-			    		android:clickable="false"
-			    		android:background="#FF0000"
-			            />
-		            <RadioButton 
-			            android:layout_width="match_parent"
-			    		android:layout_height="wrap_content"
-			    		android:layout_weight="1"
-			            />
-		            <RadioButton 
-			            android:layout_width="match_parent"
-			    		android:layout_height="wrap_content"
-			    		android:layout_weight="1"
-			            />
-		            <RadioButton 
-			            android:layout_width="match_parent"
-			    		android:layout_height="wrap_content"
-			    		android:layout_weight="1"
-			            />
-		            <RadioButton 
-			            android:layout_width="match_parent"
-			    		android:layout_height="wrap_content"
-			    		android:layout_weight="1"
-			            />
-		            <RadioButton 
-			            android:layout_width="match_parent"
-			    		android:layout_height="wrap_content"
-			    		android:layout_weight="1"
-			            />
-		            <RadioButton 
-			            android:layout_width="match_parent"
-			    		android:layout_height="wrap_content"
-			    		android:layout_weight="1"
-			            />
-		            <RadioButton 
-			            android:layout_width="match_parent"
-			    		android:layout_height="wrap_content"
-			    		android:layout_weight="1"
-			            />
-				</RadioGroup>
+
 			</LinearLayout>
 			<EditText 
+			    android:id="@+id/reserve_phone_edt"
 			    android:layout_width="230dp"
 			    android:layout_height="wrap_content"
 			    android:hint="请输入手机号"
 			    android:layout_marginTop="30dp"
 			    />
-			<TextView 
+			<LinearLayout 
 			    android:layout_width="230dp"
-			    android:layout_height="wrap_content"
-			    android:layout_marginTop="10dp"
-			    android:text="金额：100元"
-			    android:gravity="right"
-			    />
+				android:layout_height="wrap_content"
+				android:layout_marginTop="10dp"
+				android:orientation="horizontal"
+				android:gravity="right"
+			    >
+			    <TextView 
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:text="金额："
+				    />
+			    <TextView 
+			        android:id="@+id/reserve_total"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:text="0"
+				    />
+			</LinearLayout>
+				
 			<Button 
+			    android:id="@+id/reserve_ok_btn"
 			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
 			    android:text="确定"

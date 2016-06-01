@@ -9,5 +9,6 @@
     <string name="title_activity_movie_info">MovieInfoActivity</string>
     <string name="title_activity_product">ProductActivity</string>
     <string name="title_activity_reserve">ReserveActivity</string>
+    <string name="title_activity_user_info">UserInfoActivity</string>
 
 </resources>

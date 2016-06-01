@@ -23,9 +23,19 @@
             android:layout_width="wrap_content"
     		android:layout_height="match_parent"
     		android:gravity="center_vertical"
-    		android:textColor="#e0000000"
+    		android:textColor="#c0000000"
     		android:textSize="18sp"
     		android:text="请登录"
+            />
+        <TextView 
+            android:id="@+id/main_user_logout"
+            android:layout_width="wrap_content"
+    		android:layout_height="match_parent"
+    		android:layout_marginLeft="25dp"
+    		android:gravity="center_vertical"
+    		android:textColor="#90000000"
+    		android:textSize="15sp"
+    		android:text="退出"
             />
     </LinearLayout>
     <ListView 

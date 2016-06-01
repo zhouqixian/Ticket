@@ -72,7 +72,7 @@ public class ProductActivity extends Activity {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(ProductActivity.this, ReserveActivity.class);
 				intent.putExtra("product", _products.get(arg2));
-				startActivity(intent);
+				startActivityForResult(intent, 111);
 			}
 		});
 	}
@@ -110,6 +110,15 @@ public class ProductActivity extends Activity {
 					new String[]{"cinema_name", "cinema_address", "type", "screening_room", "start_time", "end_time", "price"}, 
 					new int[]{R.id.product_list_cinema_name, R.id.product_list_address, R.id.product_list_type, R.id.product_list_screening_room, R.id.product_list_start_time, R.id.product_list_end_time, R.id.product_list_price});
 			_pd_lv.setAdapter(simpleAdapter);
+		}
+	}
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == 111 && resultCode == 112) {
+			setResult(112);
+			finish();
 		}
 	}
 }
