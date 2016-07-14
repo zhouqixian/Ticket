@@ -17,6 +17,7 @@ public class SignupActivity extends Activity{
 	private EditText _phone_edt, _name_edt, _pw_edt, _pw_confirm_edt;
 	private Button _signup_btn;
 	private DataBaseHelper dbHandler;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -25,6 +26,8 @@ public class SignupActivity extends Activity{
 		initView();
 		initEvent();
 	}
+
+	// init variables
 	private void initView() {
 		dbHandler = DataBaseHelper.getInstance(this);
 		_phone_edt = (EditText)findViewById(R.id.signup_phone_edt);
@@ -33,6 +36,8 @@ public class SignupActivity extends Activity{
 		_pw_confirm_edt = (EditText)findViewById(R.id.signup_confirm_password_edt);
 		_signup_btn = (Button)findViewById(R.id.signup_signup_btn);
 	}
+
+	// set listeners
 	private void initEvent() {
 		_signup_btn.setOnClickListener(new OnClickListener() {
 			
@@ -43,22 +48,30 @@ public class SignupActivity extends Activity{
 			}
 		});
 	}
+
+	// Signup
 	private void signupFunction() {
 		String phone = _phone_edt.getText().toString();
 		String name = _name_edt.getText().toString();
 		String pw1 = _pw_edt.getText().toString();
 		String pw2 = _pw_confirm_edt.getText().toString();
+
+		// Blank info
 		if (phone.equals("") || name.equals("") || pw1.equals("") || pw2.equals("")) {
 			Toast.makeText(this, "信息不能为空", Toast.LENGTH_SHORT).show();
 			return;
 		}
+
+		// Two passwords are different
 		if (!pw1.equals(pw2)) {
 			Toast.makeText(this, "两次输入的密码不一致", Toast.LENGTH_SHORT).show();
 			_pw_edt.setText("");
 			_pw_confirm_edt.setText("");
 			return;
 		}
+
 		User temp = dbHandler.queryUser(phone);
+		// Used phone number
 		if (temp != null) {
 			Toast.makeText(this, "用该手机号注册的用户已存在", Toast.LENGTH_SHORT).show();
 			_phone_edt.setText("");
@@ -67,6 +80,8 @@ public class SignupActivity extends Activity{
 			_pw_confirm_edt.setText("");
 			return;
 		}
+
+		// DB opeartions
 		temp = new User();
 		temp.setUser_id(phone);
 		temp.setPassword(pw1);
@@ -74,6 +89,7 @@ public class SignupActivity extends Activity{
 		temp.setDist_code("440106 510510");
 		dbHandler.addUser(temp);
 		Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
+		
 		finish();
 	}
 }

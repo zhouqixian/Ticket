@@ -48,6 +48,8 @@ public class MovieInfoActivity extends Activity {
 		initView();
 		initEvent();
 	}
+
+	// init variables
 	private void initView() {
 		_application = (MyApplication)getApplication();
 		dbHandler = DataBaseHelper.getInstance(this);
@@ -63,6 +65,8 @@ public class MovieInfoActivity extends Activity {
 		_back = (ImageView)findViewById(R.id.movie_info_back);
 		_reserve_btn = (Button)findViewById(R.id.movie_info_reserve);
 		movie = (Movie)getIntent().getSerializableExtra("movie");
+
+		// Show movie info in detail
 		if (movie != null) {
 			_img.setImageResource(_application.getPhotoMap().get(movie.getPhoto()));
 			_name_tv.setText(movie.getMovie_name());
@@ -75,6 +79,8 @@ public class MovieInfoActivity extends Activity {
 			_plot_tv.setText(movie.getDescription());
 		}
 	}
+
+	// set listeners
 	private void initEvent() {
 		_back.setOnClickListener(new OnClickListener() {
 			
@@ -84,6 +90,7 @@ public class MovieInfoActivity extends Activity {
 				finish();
 			}
 		});
+
 		_reserve_btn.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -95,6 +102,7 @@ public class MovieInfoActivity extends Activity {
 			}
 		});
 	}
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub

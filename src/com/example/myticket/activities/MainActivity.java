@@ -31,6 +31,7 @@ public class MainActivity extends Activity {
 	private DataBaseHelper dbHandler;
 	private List<Map<String, Object>> _listItems;
 	private SimpleAdapter simpleAdapter;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,6 +40,7 @@ public class MainActivity extends Activity {
 		setAdapter();
 		initEvent();
 	}
+
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
@@ -53,6 +55,8 @@ public class MainActivity extends Activity {
 		}
 		setAdapter();
 	}
+
+	// set listeners
 	private void initEvent() {
 		_main_text.setOnClickListener(new OnClickListener() {
 			@Override
@@ -66,6 +70,7 @@ public class MainActivity extends Activity {
 				}
 			}
 		});
+
 		_logout_tv.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -80,6 +85,7 @@ public class MainActivity extends Activity {
 				_logout_tv.setVisibility(View.GONE);
 			}
 		});
+
 		_movies_view.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -92,9 +98,11 @@ public class MainActivity extends Activity {
 			}
 		});
 	}
+
 	private void setAdapter() {
 		_movies = dbHandler.queryAllMovie();
 		if (_movies == null) return;
+
 		_listItems = new ArrayList<Map<String,Object>>();
 		for (Movie movie : _movies) {
 			Map<String, Object> item = new HashMap<String, Object>();
@@ -107,12 +115,15 @@ public class MainActivity extends Activity {
 			item.put("saleAccount", movie.getSale_account());
 			_listItems.add(item);
 		}
+
 		simpleAdapter = new SimpleAdapter(this, _listItems, R.layout.movies_list_item, 
 				new String[]{"img", "name", "point", "type", "director", "actors", "saleAccount"}, 
 				new int[]{R.id.movies_list_img, R.id.movies_list_name, R.id.movies_list_point, R.id.movies_list_type, R.id.movies_list_director, R.id.movies_list_actors, R.id.movies_list_sale_account});
 		_movies_view.setAdapter(simpleAdapter);
 		
 	}
+
+	// init variables
 	private void initView() {
 		_main_text = (TextView)findViewById(R.id.main_user_name);
 		_movies_view = (ListView)findViewById(R.id.main_movie_list);

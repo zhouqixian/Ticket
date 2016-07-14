@@ -43,6 +43,7 @@ public class ReserveActivity extends Activity {
 	private MyApplication _application;
 	private int _select_counter = 0;
 	private String[] _seat_state;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -50,6 +51,8 @@ public class ReserveActivity extends Activity {
 		initView();
 		initEvent();
 	}
+
+	// init variables
 	private void initView() {
 		_select_items = new ArrayList<ImageView>();
 		dbHandler = DataBaseHelper.getInstance(this);
@@ -65,6 +68,8 @@ public class ReserveActivity extends Activity {
 		}
 		initSelectZoom();
 	}
+
+	// set listeners
 	private void initEvent() {
 		_back.setOnClickListener(new OnClickListener() {
 			
@@ -81,25 +86,31 @@ public class ReserveActivity extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				String phone;
+
+				// No seat is selected
 				if (_select_counter == 0) {
 					Toast.makeText(ReserveActivity.this, "请选择座位", Toast.LENGTH_SHORT).show();
 					return;
 				}
+
+				// Phone number is empty
 				if (_phone_edt.getVisibility() != View.GONE) {
 					phone = _phone_edt.getText().toString();
 					if (phone.equals("")) {
 						Toast.makeText(ReserveActivity.this, "手机号不能为空", Toast.LENGTH_SHORT).show();
 						return;
 					}
-				}
-				else {
+				} else {
 					phone = _application.getUser().getUser_id();
 				}
+
+				// New reservation
 				Reservation reservation = new Reservation();
 				reservation.setPhone(phone);
 				reservation.setProduct_description_id(_product.getProduct_description_id());
 				reservation.setTicket_quantity(_select_counter);
 				reservation.setTotal_price(_select_counter * _product.getPrice());
+
 				ArrayList<String> seats = new ArrayList<String>();
 				for (int i = 0; i < _select_items.size(); i++) {
 					if (_select_items.get(i).isSelected()) {
@@ -109,38 +120,49 @@ public class ReserveActivity extends Activity {
 						_seat_state[i] = "0";
 					}
 				}
+
 				_product.setSeat_availible(Join(_seat_state, ","));
 				dbHandler.updateProductDescription(_product);
 				reservation.setSeat(Join(seats.toArray(new String[]{}), "/"));
 				reservation.setReservationTime(new Date(System.currentTimeMillis()));
 				String s = "r" + Integer.toString((int)(1+Math.random()*(1000000-1+1)));
+
 				while (dbHandler.queryReservation(s) != null) {
 					s = "r" + Integer.toString((int)(1+Math.random()*(1000000-1+1)));
 				}
+
 				reservation.setReservation_id(s);
 				dbHandler.addReservation(reservation);
+
 				Movie movie = dbHandler.queryMovie(_product.getMovie_id());
 				movie.setSale_account(movie.getSale_account() + _select_counter);
 				dbHandler.updateMovie(movie);
 				setResult(112);
+
 				finish();
 			}
 		});
 	}
+
 	private void initSelectZoom() {
 		if (_product == null) return;
+
 		_seat_state = _product.getSeat_availible().split(",");
 		screeningRoom = dbHandler.queryScreeningRoom(_product.getScreening_room_id());
+
 		if (screeningRoom == null) return;
+
 		for (int i = 0; i < screeningRoom.getRow(); i++) {
 			LinearLayout linearLayout = new LinearLayout(this);
 			linearLayout.setOrientation(LinearLayout.HORIZONTAL);
 			linearLayout.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+			
 			for (int j = 0; j < screeningRoom.getCol(); j++) {
 				int index = i * screeningRoom.getCol() + j;
 				ImageView imageView = new ImageView(this);
 				LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 				lp.weight = 1;
+
 				imageView.setLayoutParams(lp);
 				imageView.setAdjustViewBounds(true);
 				imageView.setOnClickListener(new OnClickListener() {
@@ -151,31 +173,36 @@ public class ReserveActivity extends Activity {
 						if (v.isSelected()) {
 							v.setSelected(false);
 							_select_counter--;
-						}
-						else {
+						} else {
 							v.setSelected(true);
 							_select_counter++;
 						}
+
 						_total_tv.setText(Float.toString((_product.getPrice() * _select_counter)));
 					}
 				});
+
 				if (_seat_state[index].equals("1")) {
 					imageView.setImageResource(R.drawable.seat_selector);
 				} else {
 					imageView.setImageResource(R.drawable.ic_seat_have_selected);
 					imageView.setClickable(false);
 				}
+
 				_select_items.add(imageView);
 				linearLayout.addView(imageView);
 			}
+
 			_select_zoom.addView(linearLayout);
 		}
 	}
+
 	private String Join(String[] strs, String splite) {
 		StringBuilder stringBuilder = new StringBuilder();
 		for (int i = 0; i < strs.length - 1; i++) {
 			stringBuilder.append(strs[i]).append(splite);
 		}
+		
 		stringBuilder.append(strs[strs.length - 1]);
 		return stringBuilder.toString();
 	}

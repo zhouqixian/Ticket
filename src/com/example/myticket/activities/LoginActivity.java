@@ -21,6 +21,7 @@ public class LoginActivity extends Activity{
 	private EditText _phone_edt, _password_edt;
 	private DataBaseHelper dbHandler;
 	private MyApplication _application;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -29,6 +30,8 @@ public class LoginActivity extends Activity{
 		initView();
 		initEvent();
 	}
+
+	// init variables
 	private void initView() {
 		dbHandler = DataBaseHelper.getInstance(this);
 		_application = (MyApplication)getApplication();
@@ -37,6 +40,8 @@ public class LoginActivity extends Activity{
 		_password_edt = (EditText)findViewById(R.id.login_password_edt);
 		_phone_edt = (EditText)findViewById(R.id.login_phone_edt);
 	}
+
+	// set listeners
 	private void initEvent() {
 		_signup_btn.setOnClickListener(new OnClickListener() {
 			
@@ -46,6 +51,7 @@ public class LoginActivity extends Activity{
 				startActivity(new Intent(LoginActivity.this, SignupActivity.class));
 			}
 		});
+
 		_login_btn.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -55,31 +61,42 @@ public class LoginActivity extends Activity{
 			}
 		});
 	}
+
+	// Login
 	private void loginFunction() {
 		String phone = _phone_edt.getText().toString();
 		String pw = _password_edt.getText().toString();
+
+		// Blank info
 		if (phone.equals("") || pw.equals("")) {
 			Toast.makeText(this, "’À∫≈ªÚ√‹¬Î≤ªƒ‹Œ™ø’", Toast.LENGTH_SHORT).show();
 			return;
 		}
+
 		User temp = dbHandler.queryUser(phone);
+		// User not existed
 		if (temp == null) {
 			Toast.makeText(this, "’À∫≈≤ª¥Ê‘⁄", Toast.LENGTH_SHORT).show();
 			_phone_edt.setText("");
 			_password_edt.setText("");
 			return;
 		}
+
+		// Wrong password
 		if (!temp.getPassword().equals(pw)) {
 			Toast.makeText(this, "√‹¬Î¥ÌŒÛ", Toast.LENGTH_SHORT).show();
 			_phone_edt.setText("");
 			_password_edt.setText("");
 			return;
 		}
+
+		// DB opeartions
 		_application.setUser(temp);
 		SharedPreferences sharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE);
 		SharedPreferences.Editor editor = sharedPreferences.edit();
 		editor.putString("phone", temp.getUser_id());
 		editor.commit();
+		
 		finish();
 	}
 }
