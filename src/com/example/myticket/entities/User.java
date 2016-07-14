@@ -2,6 +2,7 @@ package com.example.myticket.entities;
 
 import java.io.Serializable;
 
+// User class
 public class User implements Serializable{
 
 	/**
@@ -12,30 +13,40 @@ public class User implements Serializable{
 	private String name;
 	private String password;
 	private String dist_code;
+
+	// get and set functions
 	public String getUser_id() {
 		return user_id;
 	}
+
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	public String getDist_code() {
 		return dist_code;
 	}
+
 	public void setDist_code(String dist_code) {
 		this.dist_code = dist_code;
 	}
+	
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub

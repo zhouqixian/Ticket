@@ -2,6 +2,8 @@ package com.example.myticket.entities;
 
 import java.io.Serializable;
 
+
+// ScreeningRoom class
 public class ScreeningRoom implements Serializable{
 
 	/**
@@ -12,6 +14,8 @@ public class ScreeningRoom implements Serializable{
 	private String screening_room_name;
 	private int row;
 	private int col;
+
+	// Constructors
 	public ScreeningRoom() {
 		// TODO Auto-generated constructor stub
 	}
@@ -22,35 +26,44 @@ public class ScreeningRoom implements Serializable{
 		this.row = row;
 		this.col = col;
 	}
+
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
 		return String.format("ScreeningRoom{screening_room_id:%s, screening_room_name:%s, row:%d, col:%d}", 
 				screening_room_id, screening_room_name, row, col);
 	}
+
+	// get and set functions
 	public String getScreening_room_id() {
 		return screening_room_id;
 	}
+
 	public void setScreening_room_id(String screening_room_id) {
 		this.screening_room_id = screening_room_id;
 	}
+
 	public String getScreening_room_name() {
 		return screening_room_name;
 	}
+
 	public void setScreening_room_name(String screening_room_name) {
 		this.screening_room_name = screening_room_name;
 	}
+
 	public int getRow() {
 		return row;
 	}
+
 	public void setRow(int row) {
 		this.row = row;
 	}
+
 	public int getCol() {
 		return col;
 	}
+
 	public void setCol(int col) {
 		this.col = col;
 	}
-	
 }
