@@ -19,6 +19,7 @@ import com.example.myticket.entities.Reservation;
 import com.example.myticket.entities.ScreeningRoom;
 import com.example.myticket.entities.User;
 
+// NOTICE THAT test code is embedded in ordinary code.
 public class DataBaseHelper extends SQLiteOpenHelper{
 	private final static String DATABASE_NAME = "ticket.db3";  
     private final static int DB_VERSION = 5;
@@ -125,6 +126,8 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 		db.execSQL("drop table if exists " + TABLE_USER);
 		Log.i("test", "after drop");
 
+
+		// Test table creation
 		// Create tables
 		db.execSQL(create_cinema_table);
 		Log.i("test", "1");

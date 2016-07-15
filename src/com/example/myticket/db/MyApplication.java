@@ -17,6 +17,7 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+// NOTICE THAT test code is embedded in ordinary code.
 public class MyApplication extends Application{
 	private User _u;
 	private Map<String, Integer> _photo_map;
@@ -25,13 +26,16 @@ public class MyApplication extends Application{
 	public void onCreate() {
 		// TODO Auto-generated method stub
 		super.onCreate();
+
 		SharedPreferences sharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE);
 		String phone = sharedPreferences.getString("phone", " ");
 		_u = DataBaseHelper.getInstance(getApplicationContext()).queryUser(phone);
+
 		_photo_map = new HashMap<String, Integer>();
 		_photo_map.put("photo1", new Integer(R.drawable.photo1));
 		_photo_map.put("photo2", new Integer(R.drawable.photo2));
 		_photo_map.put("photo3", new Integer(R.drawable.photo3));
+
 		initData();
 	}
 
@@ -67,6 +71,7 @@ public class MyApplication extends Application{
 		dbHelper.addCinema(c1);
 		dbHelper.addCinema(c2);
 		
+		// Test queryAllCinema()
 //		ArrayList<Cinema> cs = dbHelper.queryAllCinema();
 //		for (Cinema cinema : cs) {
 //			Log.i("test", cinema.toString());
@@ -83,6 +88,7 @@ public class MyApplication extends Application{
 		dbHelper.addLocation(new Location("440113 511400", "广东省广州市番禺区"));
 		dbHelper.addLocation(new Location("440114 510800", "广东省广州市花都区"));
 		
+		// Test queryAllLocation()
 //		ArrayList<Location> ls = dbHelper.queryAllLocation();
 //		for (Location location : ls) {
 //			Log.i("test", location.toString());
@@ -96,6 +102,7 @@ public class MyApplication extends Application{
 		dbHelper.addScreeningRoom(new ScreeningRoom("s4", "D", 10, 8));
 		dbHelper.addScreeningRoom(new ScreeningRoom("s5", "E", 10, 8));
 
+		// Test queryAllScreeningRoom()
 //		ArrayList<ScreeningRoom> ss = dbHelper.queryAllScreeningRoom();
 //		for (ScreeningRoom screeningRoom : ss) {
 //			Log.i("test", screeningRoom.toString());
@@ -147,6 +154,7 @@ public class MyApplication extends Application{
 		dbHelper.addMovie(m2);
 		dbHelper.addMovie(m3);
 
+		// Test queryAllMovie()
 //		ArrayList<Movie> ms = dbHelper.queryAllMovie();
 //		for (Movie movie : ms) {
 //			Log.i("test", movie.toString());
@@ -202,6 +210,7 @@ public class MyApplication extends Application{
 		dbHelper.addProductDescription(p5);
 		dbHelper.addProductDescription(p6);
 
+		// Test queryAllProductDescription()
 //		ArrayList<ProductDescription> ps = dbHelper.queryAllProductDescription();
 //		for (ProductDescription productDescription : ps) {
 //			Log.i("test", productDescription.toString());
