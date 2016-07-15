@@ -36,6 +36,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     public final static String USER_NAME = "Name";
     public final static String USER_PASSWORD = "Password";
     public final static String DIST_CODE = "DistCode";
+
     public final static String MOVIE_ID = "MovieId";
     public final static String MOVIE_NAME = "Name";
     public final static String MOVIE_TAG = "Tag";
@@ -47,18 +48,23 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     public final static String MOVIE_DURATION = "Duration";
     public final static String MOVIE_SALE_ACCOUNT = "SaleAccount";
     public final static String MOVIE_POINT = "Point";
+
     public final static String CINEMA_ID = "CinemaId";
     public final static String CINEMA_NAME = "Name";
+
     public final static String LOCATION_ADDRESS_NAME = "AddressName";
+
     public final static String PRODES_ID = "ProductDescriptionId";
     public final static String PRODES_TYPE = "Type";
     public final static String PRODES_START_TIME = "StartTime";
     public final static String PRODES_PRICE = "Price";
     public final static String PRODES_SEAT_AVAILIABLE = "SeatAvailiable";
+
     public final static String SCREENING_ROOM_ID = "ScreeningRoomId";
     public final static String SCREENING_ROOM_NAME = "Name";
     public final static String SCREENING_ROOM_ROW = "Row";
     public final static String SCREENING_ROOM_COL = "Col";
+    
     public final static String RESERVATION_ID = "ReservationId";
     public final static String RESERVATION_RESERVE_TIME = "ReserveTime";
     public final static String RESERVATION_PHONE = "Phone";
